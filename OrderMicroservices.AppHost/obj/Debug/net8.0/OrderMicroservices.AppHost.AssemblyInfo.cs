@@ -25,7 +25,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("OrderMicroservices.AppHost")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+7d9a8912c25ad1f3124b2c58c12c4ceb280746f9")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2154668c9e137f58bfea8bf801dcba32bd6bb8ae")]
 [assembly: System.Reflection.AssemblyProductAttribute("OrderMicroservices.AppHost")]
 [assembly: System.Reflection.AssemblyTitleAttribute("OrderMicroservices.AppHost")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

@@ -11,12 +11,12 @@
 using System;
 using System.Reflection;
 
-[assembly: System.Reflection.AssemblyCompanyAttribute("OrderMicroservices.ServiceDefaults")]
+[assembly: System.Reflection.AssemblyCompanyAttribute("OrderMicroservices.Order.Infra")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
 [assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+2154668c9e137f58bfea8bf801dcba32bd6bb8ae")]
-[assembly: System.Reflection.AssemblyProductAttribute("OrderMicroservices.ServiceDefaults")]
-[assembly: System.Reflection.AssemblyTitleAttribute("OrderMicroservices.ServiceDefaults")]
+[assembly: System.Reflection.AssemblyProductAttribute("OrderMicroservices.Order.Infra")]
+[assembly: System.Reflection.AssemblyTitleAttribute("OrderMicroservices.Order.Infra")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
 
 // Gerado pela classe WriteCodeFragment do MSBuild.
