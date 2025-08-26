@@ -1,0 +1,11 @@
+services:
+    database:
+        image: postgres:latest
+        environment:
+            POSTGRES_USER: orders
+            POSTGRES_PASSWORD: password_orders
+            POSTGRES_DB: orders_microservice_db
+        volumes:
+            - db_data:/var/lib/postgresql/data
+        networks:
+            - backend    
