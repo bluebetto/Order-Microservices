@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace OrderMicroservices.Order.Application.Commands.CreateOrder
+namespace OrderMicroservices.Orders.Application.Commands.CreateOrder
 {
     public class CreateOrderCommandHandler : IRequestHandler<CreateOrderCommand, CreateOrderResult>
     {

@@ -1,5 +1,5 @@
 
-namespace OrderMicroservices.Order.Api;
+namespace OrderMicroservices.Orders.Api;
 
 public class Program
 {

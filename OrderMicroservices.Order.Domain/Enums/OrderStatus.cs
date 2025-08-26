@@ -1,4 +1,4 @@
-﻿namespace OrderMicroservices.Order.Domain.Enums
+﻿namespace OrderMicroservices.Orders.Domain.Enums
 {
     public enum OrderStatus
     {

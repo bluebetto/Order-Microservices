@@ -1,4 +1,4 @@
-﻿namespace OrderMicroservices.Order.Domain.ValueObjects
+﻿namespace OrderMicroservices.Orders.Domain.ValueObjects
 {
     public record Money(decimal Amount, string Currency)
     {

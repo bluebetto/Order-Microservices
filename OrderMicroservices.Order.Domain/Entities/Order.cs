@@ -1,9 +1,10 @@
-﻿using OrderMicroservices.Order.Domain.Enums;
-using OrderMicroservices.Order.Domain.ValueObjects;
+﻿using OrderMicroservices.Common;
+using OrderMicroservices.Orders.Domain.Enums;
+using OrderMicroservices.Orders.Domain.ValueObjects;
 
-namespace OrderMicroservices.Order.Domain.Entities
+namespace OrderMicroservices.Orders.Domain.Entities
 {
-    public class Order
+    public class Order : BaseEntity
     {
         private readonly List<OrderItem> _items = new();
         public Guid CustomerId { get; set; }

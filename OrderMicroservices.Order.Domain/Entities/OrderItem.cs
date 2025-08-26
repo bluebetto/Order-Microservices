@@ -1,8 +1,9 @@
-﻿using OrderMicroservices.Order.Domain.ValueObjects;
+﻿using OrderMicroservices.Common;
+using OrderMicroservices.Orders.Domain.ValueObjects;
 
-namespace OrderMicroservices.Order.Domain.Entities
+namespace OrderMicroservices.Orders.Domain.Entities
 {
-    public class OrderItem
+    public class OrderItem : BaseEntity
     {
         public Guid OrderId { get; set; }
         public Guid ProductId { get; set; }

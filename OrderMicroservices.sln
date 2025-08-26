@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.14.36301.6
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Order.Api", "OrderMicroservices.Order.Api\OrderMicroservices.Order.Api.csproj", "{AF115DB4-939B-B979-A601-933134D12B7D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Orders.Api", "OrderMicroservices.Order.Api\OrderMicroservices.Orders.Api.csproj", "{AF115DB4-939B-B979-A601-933134D12B7D}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.AppHost", "OrderMicroservices.AppHost\OrderMicroservices.AppHost.csproj", "{BB2DC131-46FD-4D3E-8D29-9199A2D1F1C8}"
 EndProject
@@ -11,17 +11,19 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.ServiceD
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Orders", "Orders", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Order.Application", "OrderMicroservices.Order.Application\OrderMicroservices.Order.Application.csproj", "{429F19CF-DC1B-4CBB-9E24-379DD43EE4B3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Orders.Application", "OrderMicroservices.Order.Application\OrderMicroservices.Orders.Application.csproj", "{429F19CF-DC1B-4CBB-9E24-379DD43EE4B3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Order.Domain", "OrderMicroservices.Order.Domain\OrderMicroservices.Order.Domain.csproj", "{12383C85-40A9-4759-B885-3AB36C35D785}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Orders.Domain", "OrderMicroservices.Order.Domain\OrderMicroservices.Orders.Domain.csproj", "{12383C85-40A9-4759-B885-3AB36C35D785}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Order.Infra", "OrderMicroservices.Order.Infra\OrderMicroservices.Order.Infra.csproj", "{A9E1518C-76FE-4D71-AFF1-0D27A0706F6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Orders.Infra", "OrderMicroservices.Order.Infra\OrderMicroservices.Orders.Infra.csproj", "{A9E1518C-76FE-4D71-AFF1-0D27A0706F6B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Itens de Solução", "Itens de Solução", "{380A7511-A354-6D7A-0CC0-8FA1F1BA7B6C}"
 	ProjectSection(SolutionItems) = preProject
 		.gitignore = .gitignore
 		docker-compose.yml = docker-compose.yml
 	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Common", "OrderMicroservices.Common\OrderMicroservices.Common.csproj", "{D7C71E50-FC81-4196-928C-6A2CA5BC2A04}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,10 @@ Global
 		{A9E1518C-76FE-4D71-AFF1-0D27A0706F6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A9E1518C-76FE-4D71-AFF1-0D27A0706F6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A9E1518C-76FE-4D71-AFF1-0D27A0706F6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7C71E50-FC81-4196-928C-6A2CA5BC2A04}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7C71E50-FC81-4196-928C-6A2CA5BC2A04}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7C71E50-FC81-4196-928C-6A2CA5BC2A04}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7C71E50-FC81-4196-928C-6A2CA5BC2A04}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
