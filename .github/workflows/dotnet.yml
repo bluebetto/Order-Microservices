@@ -21,12 +21,13 @@ jobs:
       with:
         dotnet-version: 8.0.x
     - name: Restore dependencies
-      run: dotnet restore
+      run: dotnet restore OrderMicroservices.sln
     - name: Build
-      run: dotnet build --no-restore
-    - name: Test
-      run: dotnet test OrderMicroservices.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./TestResults
-
+      run: dotnet build OrderMicroservices.sln --configuration Release --no-restore
+      
+    - name: Run Tests with Coverage
+      run: dotnet test OrderMicroservices.sln --configuration Release --collect:"XPlat Code Coverage" --results-directory ./TestResults --logger trx
+      
     - name: Publish Test Results
       uses: actions/upload-artifact@v4
       with:
