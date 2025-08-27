@@ -31,3 +31,4 @@ publish/
 # Logs
 *.log
 
+/TestResults
