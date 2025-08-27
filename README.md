@@ -1,6 +1,8 @@
 # Order with Microservices
 Small project about Product order flow with microservices architecture
 
+[![.NET](https://github.com/bluebetto/Order-Microservices/actions/workflows/dotnet.yml/badge.svg)](https://github.com/bluebetto/Order-Microservices/actions/workflows/dotnet.yml)
+
 # Welcome
 
 The objective of this project is to demonstrate how to implement a simple order flow using microservices architecture. The project consists of three main services: Product Service, Order Service, and Payment Service. Each service is responsible for a specific part of the order process.
