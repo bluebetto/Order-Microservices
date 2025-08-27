@@ -47,7 +47,7 @@ jobs:
     - name: Send Detailed Coverage Report to Discord
       run: |
         # Ler e processar o relatório de coverage
-        COVERAGE_CONTENT=$(cat coverage_summary.md)
+        COVERAGE_CONTENT=$(cat code-coverage-results.md)
         
         # Extrair todas as métricas importantes
         LINE_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP 'Lines.*?\|\s*\K[0-9.]+%' | head -1)
