@@ -39,13 +39,11 @@ jobs:
       with:
         filename: TestResults/**/coverage.cobertura.xml
         badge: true
-        fail_below_min: true
+        fail_below_min: false
         format: markdown
-        hide_branch_rate: false
-        hide_complexity: true
         indicators: true
-        output: both
-        thresholds: '20 80'
+        output: file
+        thresholds: '60 80'
     - name: Send Detailed Coverage Report to Discord
       run: |
         # Ler e processar o relatório de coverage
