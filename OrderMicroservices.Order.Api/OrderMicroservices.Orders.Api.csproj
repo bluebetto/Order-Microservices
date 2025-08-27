@@ -23,6 +23,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrderMicroservices.Order.Application\OrderMicroservices.Orders.Application.csproj" />
+    <ProjectReference Include="..\OrderMicroservices.ServiceDefaults\OrderMicroservices.ServiceDefaults.csproj" />
   </ItemGroup>
 
 </Project>

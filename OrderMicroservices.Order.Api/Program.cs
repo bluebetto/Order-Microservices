@@ -1,4 +1,7 @@
 
+using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Hosting;
+using OrderMicroservices.Orders.Application.Commands.CreateOrder;
 using OrderMicroservices.Orders.Infra;
 
 namespace OrderMicroservices.Orders.Api;
@@ -10,6 +13,7 @@ public class Program
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
+        builder.AddServiceDefaults();
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -17,6 +21,19 @@ public class Program
         builder.Services.AddSwaggerGen();
 
         builder.Services.AddInfra(builder.Configuration);
+
+        var licenseKey = builder.Configuration["Resources:MediatrKey"];
+        
+        builder.Services.AddAutoMapper(cfg => {
+            cfg.AddMaps(typeof(CreateOrderCommand).Assembly);
+            cfg.LicenseKey = licenseKey;
+            });
+
+        builder.Services.AddMediatR(cfg => {
+            cfg.LicenseKey = licenseKey;
+            cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(CreateOrderCommand).Assembly);
+        });
 
         var app = builder.Build();
 
@@ -30,7 +47,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 

@@ -2,6 +2,7 @@
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using OrderMicroservices.Orders.Infra.Data;
+using OrderMicroservices.Orders.Infra.Repositories;
 
 namespace OrderMicroservices.Orders.Infra
 {
@@ -12,6 +13,9 @@ namespace OrderMicroservices.Orders.Infra
         {
             services.AddDbContext<OrderDbContext>(options =>
             options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
+
+            services.AddScoped<IOrderRepository, OrderRepository>();
+
             return services;
         }
 
