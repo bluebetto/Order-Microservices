@@ -42,7 +42,7 @@ jobs:
         fail_below_min: false
         format: markdown
         indicators: true
-        output: file
+        output: both
         thresholds: '60 80'
     - name: Send Detailed Coverage Report to Discord
       run: |
