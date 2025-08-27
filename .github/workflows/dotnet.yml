@@ -25,17 +25,23 @@ jobs:
     - name: Build
       run: dotnet build --no-restore
     - name: Test
-      run: dotnet test --collect:"XPlat Code Coverage" --results-directory ./TestResults --logger "trx;LogFileName=test-results.trx" /p:CoverletOutputFormat=cobertura /p:CoverletOutput=./TestResults/coverage.cobertura.xml
-      
+      run: dotnet test src/Example.sln --configuration Release --no-build --verbosity normal --collect:"XPlat Code Coverage" --results-directory ./TestResults
+
     - name: Publish Test Results
       uses: actions/upload-artifact@v4
       with:
         name: test-results
         path: ./TestResults
 
-    - name: Code Coverage Summary
+    - name: Code Coverage Report
       uses: irongut/CodeCoverageSummary@v1.3.0
       with:
-        filename: ./TestResults/coverage.cobertura.xml
-        minimum_allowed_line_rate: 70 # Example threshold
-        fail_action_if_less_than_minimum: true
+        filename: coverage/**/coverage.cobertura.xml
+        badge: true
+        fail_below_min: true
+        format: markdown
+        hide_branch_rate: false
+        hide_complexity: true
+        indicators: true
+        output: both
+        thresholds: '60 80'
