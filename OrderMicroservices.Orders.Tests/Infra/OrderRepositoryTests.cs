@@ -1,15 +1,9 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
 using OrderMicroservices.Orders.Domain.Entities;
+using OrderMicroservices.Orders.Domain.ValueObjects;
 using OrderMicroservices.Orders.Infra.Data;
 using OrderMicroservices.Orders.Infra.Repositories;
-using OrderMicroservices.Orders.Domain.ValueObjects;
-using Xunit;
 
 namespace OrderMicroservices.Orders.Tests.Infra
 {

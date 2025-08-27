@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+  <DataCollectionRunSettings>
+    <DataCollectors>
+      <DataCollector friendlyName="XPlat code coverage">
+        <Configuration>
+            <Format>cobertura</Format>
+            <ExcludeByFile>**/ServiceCollectionExtension*.cs</ExcludeByFile>
+			<ExcludeByFile>**/Migrations/*.cs</ExcludeByFile>
+			<ExcludeByFile>**/Migrations/**/*.cs</ExcludeByFile>
+          <Exclude>
+            <ModulePath>.*Common.*</ModulePath>
+            <ModulePath>.*EventBus.*</ModulePath>
+            <ModulePath>.*Tests.*</ModulePath>
+          </Exclude>
+            <ExcludeByAttribute>CompilerGeneratedAttribute</ExcludeByAttribute>
+            <ExcludeByAttribute>
+	            <Attribute>System.Diagnostics.CodeAnalysis.ExcludeFromCodeCoverageAttribute</Attribute>
+            </ExcludeByAttribute>
+        </Configuration>
+      </DataCollector>
+    </DataCollectors>
+  </DataCollectionRunSettings>
+</RunSettings>
