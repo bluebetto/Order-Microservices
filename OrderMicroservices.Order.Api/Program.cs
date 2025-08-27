@@ -1,6 +1,9 @@
 
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OrderMicroservices.EventBus;
 using OrderMicroservices.Orders.Application.Commands.CreateOrder;
 using OrderMicroservices.Orders.Infra;
 
@@ -23,17 +26,25 @@ public class Program
         builder.Services.AddInfra(builder.Configuration);
 
         var licenseKey = builder.Configuration["Resources:MediatrKey"];
-        
-        builder.Services.AddAutoMapper(cfg => {
+
+        builder.Services.AddAutoMapper(cfg =>
+        {
             cfg.AddMaps(typeof(CreateOrderCommand).Assembly);
             cfg.LicenseKey = licenseKey;
-            });
+        });
 
-        builder.Services.AddMediatR(cfg => {
+        builder.Services.AddMediatR(cfg =>
+        {
             cfg.LicenseKey = licenseKey;
             cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
             cfg.RegisterServicesFromAssembly(typeof(CreateOrderCommand).Assembly);
         });
+
+        builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQ"));
+        builder.Services.AddEventBus();
+
+        // Add FluentValidation and register validators from the specified assembly
+        builder.Services.AddValidatorsFromAssembly(typeof(CreateOrderCommandValidator).Assembly);
 
         var app = builder.Build();
 
