@@ -32,3 +32,6 @@ publish/
 *.log
 
 /TestResults
+/OrderMicroservices.Orders.Tests/TestResults/**
+/OrderMicroservices.Orders.Tests/coveragereport/**
+/OrderMicroservices.Orders.Tests/CoverageHistory/**
