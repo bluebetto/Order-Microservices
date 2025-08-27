@@ -13,16 +13,17 @@ namespace OrderMicroservices.Orders.Domain.Entities
 
         public int Quantity { get; set; }
 
-        public OrderItem(Guid productId, string productName, Money price, int quantity)
+        public OrderItem(Guid productId, string productName, Money unitPrice, int quantity)
         {
             Id = Guid.NewGuid();
             ProductId = productId;
             ProductName = productName;
-            UnitPrice = price;
+            UnitPrice = unitPrice;
             Quantity = quantity;
 
             if (quantity <= 0)
                 throw new ArgumentException("Quantity must be positive", nameof(quantity));
-        }
+        }   
+        protected OrderItem() { }
     }
 }
