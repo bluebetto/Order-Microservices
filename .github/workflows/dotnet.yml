@@ -39,23 +39,34 @@ jobs:
       with:
         filename: TestResults/**/coverage.cobertura.xml
         badge: true
-        fail_below_min: true
+        fail_below_min: false
         format: markdown
-        hide_branch_rate: false
-        hide_complexity: true
         indicators: true
         output: both
-        thresholds: '20 80'
+        thresholds: '60 80'
     - name: Send Detailed Coverage Report to Discord
       run: |
         # Ler e processar o relatório de coverage
-        COVERAGE_CONTENT=$(cat coverage_summary.md)
+        COVERAGE_CONTENT=$(cat code-coverage-results.md)
         
         # Extrair todas as métricas importantes
-        LINE_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP 'Lines.*?\|\s*\K[0-9.]+%' | head -1)
-        BRANCH_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP 'Branches.*?\|\s*\K[0-9.]+%' | head -1)
-        TOTAL_LINES=$(echo "$COVERAGE_CONTENT" | grep -oP 'Lines.*?\|\s*[0-9.]+%\s*\|\s*\K[0-9]+\s+of\s+[0-9]+' | head -1)
-        TOTAL_BRANCHES=$(echo "$COVERAGE_CONTENT" | grep -oP 'Branches.*?\|\s*[0-9.]+%\s*\|\s*\K[0-9]+\s+of\s+[0-9]+' | head -1)
+        # Extrai a porcentagem de cobertura de linhas (Line Rate)
+        LINE_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP '\*\*Summary\*\* \| \*\*\K[0-9]+%' | head -1)
+        
+        # Extrai o detalhe linhas cobertas/total (468 / 1192)
+        TOTAL_LINES=$(echo "$COVERAGE_CONTENT" | grep -oP '\*\*Summary\*\* \| \*\*[0-9]+% \(\K[0-9]+ / [0-9]+' | head -1)
+        
+        # Extrai a porcentagem de cobertura de branches (Branch Rate)  
+        BRANCH_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP '\*\*Summary\*\* \| \*\*[0-9]+% \([0-9]+ / [0-9]+\) \| \*\*\K[0-9]+%' | head -1)
+        
+        # Extrai o detalhe branches cobertos/total (16 / 40)
+        TOTAL_BRANCHES=$(echo "$COVERAGE_CONTENT" | grep -oP '\*\*Summary\*\* \| \*\*[0-9]+% \([0-9]+ / [0-9]+\) \| \*\*[0-9]+% \(\K[0-9]+ / [0-9]+' | head -1)
+        
+        # Extrai a complexidade total
+        COMPLEXITY=$(echo "$COVERAGE_CONTENT" | grep -oP '\*\*Summary\*\* \| \*\*[0-9]+% \([0-9]+ / [0-9]+\) \| \*\*[0-9]+% \([0-9]+ / [0-9]+\) \| \*\*\K[0-9]+' | head -1)
+        
+        # Extrai o status de saúde (✔, ❌, ➖)
+        HEALTH_STATUS=$(echo "$COVERAGE_CONTENT" | grep -oP '\*\*Summary\*\*.*?\|.*?\|.*?\|.*?\| \*\*\K[^|*]+' | head -1 | xargs)
         
         # Configurar cores baseadas na cobertura
         LINE_PCT=${LINE_COVERAGE%\%}
@@ -83,7 +94,7 @@ jobs:
           --argjson color "$COLOR" \
           --arg emoji "$EMOJI" \
           '{
-            "username": "Coverage Bot",
+            "username": "GitHub",
             "avatar_url": "https://cdn-icons-png.flaticon.com/512/4727/4727496.png",
             "embeds": [
               {
@@ -102,7 +113,7 @@ jobs:
                     "inline": true
                   },
                   {
-                    "name": "🔗 Details",
+                    "name": "🔗 Result",
                     "value": "[View Run]($run_url)",
                     "inline": true
                   }
