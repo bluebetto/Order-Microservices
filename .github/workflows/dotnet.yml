@@ -46,3 +46,76 @@ jobs:
         indicators: true
         output: both
         thresholds: '20 80'
+    - name: Send Detailed Coverage Report to Discord
+      run: |
+        # Ler e processar o relatório de coverage
+        COVERAGE_CONTENT=$(cat coverage_summary.md)
+        
+        # Extrair todas as métricas importantes
+        LINE_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP 'Lines.*?\|\s*\K[0-9.]+%' | head -1)
+        BRANCH_COVERAGE=$(echo "$COVERAGE_CONTENT" | grep -oP 'Branches.*?\|\s*\K[0-9.]+%' | head -1)
+        TOTAL_LINES=$(echo "$COVERAGE_CONTENT" | grep -oP 'Lines.*?\|\s*[0-9.]+%\s*\|\s*\K[0-9]+\s+of\s+[0-9]+' | head -1)
+        TOTAL_BRANCHES=$(echo "$COVERAGE_CONTENT" | grep -oP 'Branches.*?\|\s*[0-9.]+%\s*\|\s*\K[0-9]+\s+of\s+[0-9]+' | head -1)
+        
+        # Configurar cores baseadas na cobertura
+        LINE_PCT=${LINE_COVERAGE%\%}
+        if (( $(echo "$LINE_PCT >= 80" | bc -l) )); then
+            COLOR=3066993
+            EMOJI="🎉"
+        elif (( $(echo "$LINE_PCT >= 60" | bc -l) )); then
+            COLOR=15105570
+            EMOJI="⚠️"
+        else
+            COLOR=15158332
+            EMOJI="🚨"
+        fi
+        
+        # Criar mensagem para Discord
+        JSON_PAYLOAD=$(jq -n \
+          --arg repo "${{ github.repository }}" \
+          --arg branch "${{ github.ref_name }}" \
+          --arg commit "${GITHUB_SHA::7}" \
+          --arg run_url "${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
+          --arg line_cov "$LINE_COVERAGE" \
+          --arg branch_cov "$BRANCH_COVERAGE" \
+          --arg lines_detail "$TOTAL_LINES" \
+          --arg branches_detail "$TOTAL_BRANCHES" \
+          --argjson color "$COLOR" \
+          --arg emoji "$EMOJI" \
+          '{
+            "username": "Coverage Bot",
+            "avatar_url": "https://cdn-icons-png.flaticon.com/512/4727/4727496.png",
+            "embeds": [
+              {
+                "title": "\($emoji) Code Coverage Report",
+                "color": $color,
+                "description": "Test coverage results for latest build",
+                "fields": [
+                  {
+                    "name": "📊 Lines Coverage",
+                    "value": "\($line_cov) (\($lines_detail))",
+                    "inline": true
+                  },
+                  {
+                    "name": "🌿 Branches Coverage",
+                    "value": "\($branch_cov) (\($branches_detail))",
+                    "inline": true
+                  },
+                  {
+                    "name": "🔗 Details",
+                    "value": "[View Run]($run_url)",
+                    "inline": true
+                  }
+                ],
+                "footer": {
+                  "text": "\($repo) @ \($branch) | \($commit)"
+                },
+                "timestamp": now|strftime("%Y-%m-%dT%H:%M:%SZ")
+              }
+            ]
+          }')
+        
+        curl -X POST \
+          -H "Content-Type: application/json" \
+          -d "$JSON_PAYLOAD" \
+          "${{ secrets.DISCORD_WEBHOOK_URL }}"
