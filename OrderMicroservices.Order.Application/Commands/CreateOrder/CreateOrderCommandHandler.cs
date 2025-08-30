@@ -1,10 +1,9 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
+using OrderMicroservices.Common.ValueObjects;
 using OrderMicroservices.EventBus;
 using OrderMicroservices.EventBus.Events;
 using OrderMicroservices.Orders.Domain.Entities;
 using OrderMicroservices.Orders.Domain.Events;
-using OrderMicroservices.Orders.Domain.ValueObjects;
 using OrderMicroservices.Orders.Infra.Repositories;
 
 namespace OrderMicroservices.Orders.Application.Commands.CreateOrder
