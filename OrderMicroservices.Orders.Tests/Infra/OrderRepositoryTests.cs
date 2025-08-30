@@ -1,7 +1,7 @@
 using FluentAssertions;
 using Microsoft.EntityFrameworkCore;
+using OrderMicroservices.Common.ValueObjects;
 using OrderMicroservices.Orders.Domain.Entities;
-using OrderMicroservices.Orders.Domain.ValueObjects;
 using OrderMicroservices.Orders.Infra.Data;
 using OrderMicroservices.Orders.Infra.Repositories;
 

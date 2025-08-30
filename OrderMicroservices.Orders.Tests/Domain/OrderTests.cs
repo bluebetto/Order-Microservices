@@ -1,8 +1,8 @@
 ﻿using FluentAssertions;
+using OrderMicroservices.Common.ValueObjects;
 using OrderMicroservices.Orders.Domain.Entities;
 using OrderMicroservices.Orders.Domain.Enums;
 using OrderMicroservices.Orders.Domain.Events;
-using OrderMicroservices.Orders.Domain.ValueObjects;
 
 namespace OrderFlow.Orders.UnitTests.Domain;
 
