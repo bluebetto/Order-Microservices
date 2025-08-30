@@ -1,7 +1,7 @@
 ﻿using OrderMicroservices.Common;
+using OrderMicroservices.Common.ValueObjects;
 using OrderMicroservices.Orders.Domain.Enums;
 using OrderMicroservices.Orders.Domain.Events;
-using OrderMicroservices.Orders.Domain.ValueObjects;
 
 namespace OrderMicroservices.Orders.Domain.Entities
 {

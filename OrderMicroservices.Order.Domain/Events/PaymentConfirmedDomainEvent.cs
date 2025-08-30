@@ -1,5 +1,5 @@
 ﻿using OrderMicroservices.Common;
-using OrderMicroservices.Orders.Domain.ValueObjects;
+using OrderMicroservices.Common.ValueObjects;
 
 namespace OrderMicroservices.Orders.Domain.Events
 {
