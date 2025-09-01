@@ -9,5 +9,6 @@ namespace OrderMicroservices.Products.Infra.Repositories
         Task<IEnumerable<Product>> GetByCategoryAsync(string category, CancellationToken cancellationToken = default);
         Task<Product> AddAsync(Product product, CancellationToken cancellationToken = default);
         void Update(Product product);
+        Task<bool> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
 }

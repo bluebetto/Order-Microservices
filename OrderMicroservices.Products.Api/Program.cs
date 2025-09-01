@@ -1,4 +1,9 @@
 
+using FluentValidation;
+using OrderMicroservices.EventBus;
+using OrderMicroservices.Products.Application.Commands.UpdateStock;
+using OrderMicroservices.Products.Infra;
+
 namespace OrderMicroservices.Products.Api;
 
 public class Program
@@ -9,6 +14,27 @@ public class Program
         builder.AddServiceDefaults();
 
         // Add services to the container.
+        builder.Services.AddInfra(builder.Configuration);
+
+        var licenseKey = builder.Configuration["Resources:MediatrKey"];
+
+        builder.Services.AddAutoMapper(cfg =>
+        {
+            cfg.AddMaps(typeof(UpdateStockCommand).Assembly);
+            cfg.LicenseKey = licenseKey;
+        });
+
+        builder.Services.AddMediatR(cfg =>
+        {
+            cfg.LicenseKey = licenseKey;
+            cfg.RegisterServicesFromAssembly(typeof(Program).Assembly);
+            cfg.RegisterServicesFromAssembly(typeof(UpdateStockCommand).Assembly);
+        });
+
+        builder.Services.Configure<RabbitMQSettings>(builder.Configuration.GetSection("RabbitMQ"));
+        builder.Services.AddEventBus();
+
+        builder.Services.AddValidatorsFromAssembly(typeof(UpdateStockCommandValidator).Assembly);
 
         builder.Services.AddControllers();
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle

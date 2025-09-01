@@ -42,6 +42,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Products
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Products.Application", "OrderMicroservices.Products.Application\OrderMicroservices.Products.Application.csproj", "{7AE0AFF3-D156-4A26-81F7-DFB7C31EF537}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OrderMicroservices.Products.Test", "OrderMicroservices.Products.Test\OrderMicroservices.Products.Test.csproj", "{E77ABF4D-7B43-4618-AEE1-0A1A813E37EA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,6 +102,10 @@ Global
 		{7AE0AFF3-D156-4A26-81F7-DFB7C31EF537}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7AE0AFF3-D156-4A26-81F7-DFB7C31EF537}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7AE0AFF3-D156-4A26-81F7-DFB7C31EF537}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E77ABF4D-7B43-4618-AEE1-0A1A813E37EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E77ABF4D-7B43-4618-AEE1-0A1A813E37EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E77ABF4D-7B43-4618-AEE1-0A1A813E37EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E77ABF4D-7B43-4618-AEE1-0A1A813E37EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -116,6 +122,7 @@ Global
 		{AAEBFA4E-B064-4000-8589-106D7B100774} = {752934BA-EC79-4127-A567-2F3B4C6CF05D}
 		{CC8D314F-A7BF-C484-E460-688E9F449B47} = {752934BA-EC79-4127-A567-2F3B4C6CF05D}
 		{7AE0AFF3-D156-4A26-81F7-DFB7C31EF537} = {752934BA-EC79-4127-A567-2F3B4C6CF05D}
+		{E77ABF4D-7B43-4618-AEE1-0A1A813E37EA} = {752934BA-EC79-4127-A567-2F3B4C6CF05D}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {2C8B5930-1941-4B1C-8119-B6DA3B6B4ABE}
