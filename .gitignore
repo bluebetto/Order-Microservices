@@ -35,3 +35,4 @@ publish/
 /OrderMicroservices.Orders.Tests/TestResults/**
 /OrderMicroservices.Orders.Tests/coveragereport/**
 /OrderMicroservices.Orders.Tests/CoverageHistory/**
+/data/postgres

@@ -36,7 +36,6 @@ namespace OrderMicroservices.Orders.Application.Commands.CreateOrder
 
             await _repository.AddAsync(order, cancellationToken);
 
-            //Publish Events
             await PublishDomainEvents(order);
 
             return new CreateOrderResult(order.Id, order.TotalAmount.Amount);

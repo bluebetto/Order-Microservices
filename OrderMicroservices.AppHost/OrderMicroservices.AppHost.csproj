@@ -17,6 +17,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\OrderMicroservices.Order.Api\OrderMicroservices.Orders.Api.csproj" />
+    <ProjectReference Include="..\OrderMicroservices.Orders.Consumer\OrderMicroservices.Orders.Consumer.csproj" />
     <ProjectReference Include="..\OrderMicroservices.Products.Api\OrderMicroservices.Products.Api.csproj" />
   </ItemGroup>
 

@@ -1,0 +1,10 @@
+{
+  "profiles": {
+    "OrderMicroservices.Orders.Consumer": {
+      "commandName": "Project"
+    },
+    "Container (Dockerfile)": {
+      "commandName": "Docker"
+    }
+  }
+}

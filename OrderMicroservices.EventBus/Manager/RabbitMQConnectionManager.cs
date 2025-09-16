@@ -13,41 +13,69 @@ namespace OrderMicroservices.EventBus.Manager
             _settings = settings;
         }
 
-        public async Task<IChannel> GetChannelAsync()
+        public async Task<IChannel> GetChannelAsync(string? routingKey = "orders.#")
         {
-            if (_connection == null)
+            string receivedRoutingKey = routingKey ?? "orders.#";
+            try
             {
-                var factory = new ConnectionFactory
+                if (_connection == null)
                 {
-                    HostName = _settings.HostName,
-                    UserName = _settings.UserName,
-                    Password = _settings.Password,
-                    ConsumerDispatchConcurrency = 1
-                };
-                _connection = await factory.CreateConnectionAsync();
-            }
+                    var factory = new ConnectionFactory
+                    {
+                        HostName = _settings.HostName,
+                        UserName = _settings.UserName,
+                        Password = _settings.Password,
+                        ConsumerDispatchConcurrency = 1
+                    };
+                    _connection = await factory.CreateConnectionAsync();
+                }
 
-            if (_channel == null)
+                if (_channel == null)
+                {
+                    _channel = await _connection.CreateChannelAsync();
+
+                    if (string.IsNullOrWhiteSpace(_settings.ExchangeName) || _settings.ExchangeName == "default")
+                        throw new InvalidOperationException("ExchangeName inválido. Não pode ser vazio ou 'default'.");
+
+                    await _channel.ExchangeDeclareAsync(exchange: _settings.ExchangeName, type: ExchangeType.Topic, durable: true);
+
+                    await _channel.QueueDeclareAsync(
+                        queue: _settings.QueueName,
+                        durable: false,
+                        exclusive: false,
+                        autoDelete: false,
+                        arguments: null
+                    );
+
+                    await _channel.QueueBindAsync(
+                        queue: _settings.QueueName,
+                        exchange: _settings.ExchangeName,
+                        routingKey: receivedRoutingKey
+                    );
+                }
+
+                return _channel;
+            }
+            catch (Exception ex)
             {
-                _channel = await _connection.CreateChannelAsync();
-                await _channel.QueueDeclareAsync(
-                    queue: _settings.QueueName,
-                    durable: false,
-                    exclusive: false,
-                    autoDelete: false,
-                    arguments: null
-                );
+                throw new InvalidOperationException("Erro ao criar o channel RabbitMQ.", ex);
             }
-
-            return _channel;
         }
 
         public async ValueTask DisposeAsync()
         {
-            if (_channel != null)
+            if (_channel != null && _channel.IsClosed != true)
+            {
                 await _channel.CloseAsync();
+                await _channel.DisposeAsync();
+            }
+
             if (_connection != null)
+            {
                 await _connection.CloseAsync();
+                await _connection.DisposeAsync();
+            }
+
         }
     }
 }

@@ -1,9 +1,9 @@
-﻿using System.Text;
-using System.Text.Json;
-using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using OrderMicroservices.EventBus.Manager;
 using RabbitMQ.Client;
+using System.Text;
+using System.Text.Json;
 
 namespace OrderMicroservices.EventBus
 {
@@ -30,42 +30,54 @@ namespace OrderMicroservices.EventBus
         public async Task PublishAsync<T>(T integrationEvent)
             where T : IIntegrationEvent
         {
-            var channel = await _connectionManager.GetChannelAsync();
-            var eventName = typeof(T).Name;
-            var message = JsonSerializer.Serialize(integrationEvent, _jsonOptions);
-
-            var body = Encoding.UTF8.GetBytes(message);
-
-            var properties = new BasicProperties
+            try
             {
-                MessageId = integrationEvent.Id.ToString(),
-                Timestamp = new AmqpTimestamp(
-                    ((DateTimeOffset)integrationEvent.CreatedAt).ToUnixTimeSeconds()
-                ),
-                DeliveryMode = DeliveryModes.Persistent,
-            };
+                IChannel channel = await _connectionManager.GetChannelAsync();
 
-            await channel.BasicPublishAsync(
-                exchange: _settings.QueueName,
-                routingKey: $"orders.{eventName.ToLowerInvariant()}",
-                false,
-                basicProperties: properties,
-                body: body
-            );
+                var eventName = typeof(T).Name;
+                var message = JsonSerializer.Serialize(integrationEvent, _jsonOptions);
 
-            _logger.LogInformation(
-                "Published integration event {EventName} with ID {EventId}",
-                eventName,
-                integrationEvent.Id
-            );
+                var body = Encoding.UTF8.GetBytes(message);
+
+                var properties = new BasicProperties
+                {
+                    MessageId = integrationEvent.Id.ToString(),
+                    Timestamp = new AmqpTimestamp(
+                        ((DateTimeOffset)integrationEvent.CreatedAt).ToUnixTimeSeconds()
+                    ),
+                    DeliveryMode = DeliveryModes.Persistent,
+                };
+
+                var routingKey = $"orders.{eventName.ToLowerInvariant()}";
+
+                await channel.BasicPublishAsync(
+                    exchange: _settings.ExchangeName,
+                    routingKey: routingKey,
+                    false,
+                    basicProperties: properties,
+                    body: body
+                );
+
+                _logger.LogInformation(
+                    "Published integration event {EventName} on routingKey {routingKey} with ID {EventId}",
+                    eventName,
+                    routingKey,
+                    integrationEvent.Id
+                );
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Error obtaining RabbitMQ channel.");
+                throw;
+            }      
 
             await Task.CompletedTask;
         }
 
-        public void Dispose()
+        public async void Dispose()
         {
             GC.SuppressFinalize(this);
-            _connectionManager.DisposeAsync().GetAwaiter().GetResult();
+            await _connectionManager.DisposeAsync();
         }
     }
 }
