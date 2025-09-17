@@ -12,7 +12,7 @@ $dir = pwd
 
 # Delete previous test run results (there's a bunch of subfolders named with guids)
 Remove-Item -Recurse -Force $dir/TestResults/
-
+dotnet clean
 # Run the Coverlet.Collector - REPLACING YOUR SOLUTION NAME!!!
 $output = [string] (& dotnet test --collect:"XPlat Code Coverage" --settings coverlet.runsettings 2>&1)
 Write-Host "Last Exit Code: $lastexitcode"
