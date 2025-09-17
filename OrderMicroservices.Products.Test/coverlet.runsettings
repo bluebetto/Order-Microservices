@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<RunSettings>
+	<DataCollectionRunSettings>
+		<DataCollectors>
+			<DataCollector friendlyName="XPlat code coverage">
+				<Configuration>
+					<Format>cobertura</Format>
+					<Exclude>[*.Test]*, [*.Tests]*, [*.Common]*, [*.EventBus]*,[*.Infra]*</Exclude>
+					<Functions>
+						<Exclude>
+							<Function>^OrderMicroservices\.Products\.Application\.Mapping\..*</Function>
+							<Function>^OrderMicroservices\.Products\.Application\.DTOs\..*</Function>
+							<Function>^OrderMicroservices\.Products\.Application\.Queries\..*</Function>
+						</Exclude>
+					</Functions>
+					<ExcludeByFile>**/*ServiceCollectionExtensions.*</ExcludeByFile>
+				</Configuration>
+			</DataCollector>
+		</DataCollectors>
+	</DataCollectionRunSettings>
+</RunSettings>
+

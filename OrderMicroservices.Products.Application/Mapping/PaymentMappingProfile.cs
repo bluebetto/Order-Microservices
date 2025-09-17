@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using OrderMicroservices.Products.Application.DTOs;
 using OrderMicroservices.Products.Domain.Entities;
+using System.Diagnostics.CodeAnalysis;
 
 namespace OrderMicroservices.Products.Application.Mapping
 {
+    [ExcludeFromCodeCoverage]
     public class ProductMappingProfile : Profile
     {
         public ProductMappingProfile()
