@@ -3,6 +3,7 @@ using FluentValidation;
 using FluentValidation.AspNetCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using OrderMicroservices.Common.Middleware;
 using OrderMicroservices.EventBus;
 using OrderMicroservices.Orders.Application.Commands.CreateOrder;
 using OrderMicroservices.Orders.Infra;
@@ -47,6 +48,10 @@ public class Program
         builder.Services.AddValidatorsFromAssembly(typeof(CreateOrderCommandValidator).Assembly);
 
         var app = builder.Build();
+
+        app.UseMiddleware<ErrorHandlingMiddleware>();
+
+        app.MapDefaultEndpoints();
 
         // Configure the HTTP request pipeline.
         if (app.Environment.IsDevelopment())

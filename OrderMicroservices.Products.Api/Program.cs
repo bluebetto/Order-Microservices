@@ -1,5 +1,6 @@
 
 using FluentValidation;
+using OrderMicroservices.Common.Middleware;
 using OrderMicroservices.EventBus;
 using OrderMicroservices.Products.Application.Commands.UpdateStock;
 using OrderMicroservices.Products.Infra;
@@ -43,6 +44,8 @@ public class Program
 
         var app = builder.Build();
 
+        app.UseMiddleware<ErrorHandlingMiddleware>();
+
         app.MapDefaultEndpoints();
 
         // Configure the HTTP request pipeline.
@@ -55,7 +58,6 @@ public class Program
         app.UseHttpsRedirection();
 
         app.UseAuthorization();
-
 
         app.MapControllers();
 
