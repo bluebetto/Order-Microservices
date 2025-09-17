@@ -36,3 +36,6 @@ publish/
 /OrderMicroservices.Orders.Tests/coveragereport/**
 /OrderMicroservices.Orders.Tests/CoverageHistory/**
 /data/postgres
+/OrderMicroservices.Products.Test/CoverageHistory
+/OrderMicroservices.Products.Test/coveragereport
+/OrderMicroservices.Products.Test/TestResults/0d2d6806-d8f2-458d-bb8b-87fcd392bb88
