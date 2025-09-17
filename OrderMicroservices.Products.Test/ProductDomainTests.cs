@@ -2,6 +2,7 @@ using FluentAssertions;
 using OrderMicroservices.Common.ValueObjects;
 using OrderMicroservices.Products.Domain.Entities;
 using OrderMicroservices.Products.Domain.Enums;
+using OrderMicroservices.Products.Domain.Exceptions;
 using Xunit;
 
 namespace OrderMicroservices.Products.Test;
@@ -52,8 +53,8 @@ public class ProductDomainTests
     public void ReserveStock_Insufficient_ShouldNotChangeQuantity()
     {
         var product = Product.Create("Teste", "Desc", new Money(10, "BRL"), "Cat", 2);
-        product.ReserveStock(5);
-        product.Stock.Quantity.Should().Be(2);
+        Assert.Throws<InsufficientStockException>(() => product.ReserveStock(5));
+        product.Stock.Quantity.Should().Be(2);        
     }
 
     [Fact]
