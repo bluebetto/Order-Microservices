@@ -1,8 +1,4 @@
-
 using FluentValidation;
-using FluentValidation.AspNetCore;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using OrderMicroservices.Common.Middleware;
 using OrderMicroservices.EventBus;
 using OrderMicroservices.Orders.Application.Commands.CreateOrder;
